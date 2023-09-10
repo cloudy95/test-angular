@@ -1,0 +1,21 @@
+.containerForm{
+    display: flex;
+    justify-content: center;
+}
+
+.button-top{
+    text-align: end;
+}
+
+.box{
+    width: 500px;
+}
+
+.full-width{
+    width: 100%;
+}
+
+.text-red{
+    color:red;
+    font-size: 11px;
+}

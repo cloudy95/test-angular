@@ -1,0 +1,61 @@
+<div mat-dialog-content>
+    
+    <form [formGroup]="form" class="form">
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Question</mat-label>
+            <input matInput type="text" formControlName="question">
+            <mat-error *ngIf="!form.get('question')?.valid">
+                Question is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Type answer</mat-label>
+            <mat-select formControlName="typeanswer">
+              <mat-option value="paragraph">Paragraph</mat-option>
+              <mat-option value="checkbox">Check Box list</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.get('typeanswer')?.valid">
+                Type answer is required
+            </mat-error>
+        </mat-form-field>
+
+        <ng-container *ngIf="form.get('typeanswer')?.value == 'checkbox'">
+ 
+            <ng-container formArrayName="cheklist">
+
+                <ng-container *ngFor="let opc of cheklist.controls; let a = index">
+
+                    <div [formGroupName]="a">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>{{a+1}} - option</mat-label>
+                            <input matInput type="text" formControlName="label">
+                            <mat-error *ngIf="!opc.get('label')?.valid">
+                                Option is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </ng-container>
+
+                <button [disabled]="cheklist.controls.length == 5" mat-raised-button color="primary" type="button" (click)="addItem()">Add Item</button>
+
+            </ng-container>
+
+            <mat-checkbox style="margin-top: 10px;" class="example-margin" formControlName="other" color="primary"> Allow user to specify their own answer</mat-checkbox>
+
+        </ng-container>
+
+        <mat-checkbox style="margin-top: 10px;" class="example-margin" formControlName="required" color="primary"> This field is required
+        </mat-checkbox>
+        
+          
+    </form>
+
+</div>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Close</button>
+    <!-- [disabled]="form.get('typeanswer')?.value == 'checkbox'" -->
+    <button mat-raised-button color="primary" (click)="submit()"  [disabled]="form.get('typeanswer')?.value == 'checkbox' && cheklist.controls.length == 0" cdkFocusInitial>Create</button>
+</mat-dialog-actions>

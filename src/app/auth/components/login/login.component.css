@@ -1,0 +1,21 @@
+.containerAuth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.auth{
+    padding: 2rem;
+    width: 350px;
+}
+
+.box-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.box-buttons>button{
+    width: 100%;
+}

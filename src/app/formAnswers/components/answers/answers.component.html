@@ -1,0 +1,27 @@
+<div class="container">
+
+    <mat-card class="box auth animate__animated animate__fadeIn">
+
+        <a style="text-decoration: none;" [routerLink]="['/form/builder']">  Back to formss builder</a>
+
+        <ng-container *ngFor="let item of answerService.getListAnswers | async">
+
+            <h1>{{ item.label }}</h1>
+    
+            <ng-container *ngIf="item.checks.length == 0; else list">
+                <p>{{ item.text }} </p>
+            </ng-container>
+
+            <ng-template #list>
+                <ul *ngFor="let val of item.checks">
+                    <li *ngIf="val.label != ''"> {{ val.label }} </li>
+                </ul>
+            </ng-template>
+            
+
+        </ng-container>
+        
+
+    </mat-card>
+
+</div>
