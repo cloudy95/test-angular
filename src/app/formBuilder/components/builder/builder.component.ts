@@ -31,8 +31,6 @@ export class BuilderComponent implements OnInit {
     this.form = this.fb.group({
       items: new FormArray([])
     })
-
-    
   }
 
   add(){

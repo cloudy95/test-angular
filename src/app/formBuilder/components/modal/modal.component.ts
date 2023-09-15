@@ -38,8 +38,19 @@ export class ModalComponent implements OnInit {
 
   submit(){
     this.form.markAllAsTouched();
+    const form = this.form.value;
+
     if( this.form.valid ){
+
+      if( form.typeanswer == "checkbox" ){
+        if( (!form.other && form.cheklist.length == 1 && form.cheklist[0].label == '') || (!form.other && form.cheklist.length == 1 && form.cheklist[0].label != '')){
+          alert('Add at least 2 answer options')
+          return;
+        }
+      }
+
       this.dialogRef.close(this.form.value)
+
     }
   }
 
