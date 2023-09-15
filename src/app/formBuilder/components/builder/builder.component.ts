@@ -76,6 +76,29 @@ export class BuilderComponent implements OnInit {
 
   review(){
     this.form.markAllAsTouched();
+
+    let validation = true;
+    let indexquestion:any = null; 
+    this.form.value.items.map((item:any, index:number)=>{
+
+      if( this.arrayQuestion[index].typeanswer == "checkbox" && this.arrayQuestion[index].required ){
+
+        let options = Object.keys(item).map(val=> item[val])
+
+        if( !options.includes(true)){
+          validation = false;
+          indexquestion = index;
+        }
+
+      }
+
+    })
+
+    if( !validation && indexquestion != null ){
+      alert(`Selected at least one option " ${this.arrayQuestion[indexquestion]?.question} "`)
+      return;
+    }
+
     if( this.form.invalid ){
       return;
     }
